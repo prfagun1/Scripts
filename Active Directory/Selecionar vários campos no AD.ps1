@@ -1,0 +1,1 @@
+get-aduser -filter * -properties * | select samaccountname, name, enabled, scriptpath, passwordlastset, passwordexpired, passwordneverexpires, passwordnotrequired, lockedout, lastlogondate, cannotchangepassword, accountexiprationdate

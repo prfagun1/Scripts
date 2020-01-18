@@ -1,0 +1,1 @@
+forfiles /p "c:\temp" /s /m *.* /d -90 /c "cmd /c del /f /s /q @path"
