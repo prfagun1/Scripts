@@ -1,0 +1,19 @@
+set pages 0
+set sqlprompt --SQL>
+set echo on
+set head off
+set linesize 300
+set termout on
+spool /tmp/kill.sql
+ 
+select 'alter system kill session ''' ||sid|| ',' || serial#|| ''' immediate;' from gv$session where USERNAME='usuario';
+
+ 
+spool off;
+ 
+@/tmp/kill.sql
+
+
+--Derrubar todos os usuarios do RAC (usar @instancia)
+select 'alter system kill session ''' ||sid|| ',' || serial#|| ',@' || INST_ID || ''' immediate;' from gv$session
+where status <> 'ACTIVE' and PROGRAM = 'programa.exe';

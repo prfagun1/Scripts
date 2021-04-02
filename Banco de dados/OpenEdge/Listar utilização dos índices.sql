@@ -1,0 +1,1 @@
+select top 5  i."_index-name" as 'Nome', it."_indexstat-read" as 'Lidos', it."_indexstat-create" 'Criados', it."_indexstat-delete" as 'Apagados', database() as 'Banco' from PUB."_indexstat" it, PUB."_index" i where i."_idx-num" = it."_indexstat-id" order by it."_indexstat-read" desc

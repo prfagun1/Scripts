@@ -1,0 +1,12 @@
+SET ANSI_WARNINGS ON
+SET NOCOUNT ON
+SET ANSI_NULLS ON
+GO
+
+
+select * from servidor.master.sys.databases 
+
+SET ANSI_WARNINGS OFF
+SET NOCOUNT OFF
+SET ANSI_NULLS OFF 
+go

@@ -1,0 +1,1 @@
+ALTER TABLE grtidb.grupoacesso AUTO_INCREMENT = 1;

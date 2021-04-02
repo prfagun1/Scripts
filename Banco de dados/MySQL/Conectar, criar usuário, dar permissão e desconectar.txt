@@ -1,0 +1,16 @@
+--Listar usuários:
+SELECT user,host FROM mysql.user;
+
+
+mysql -u root –pSenha
+
+grant all on *.* to root@'%' identified by 'senha' with grant option;
+
+flush privileges;
+
+
+Ou
+
+CREATE USER root@'10.0.%.%' IDENTIFIED BY 'senha';
+grant all on *.* to root@'10.0.%.%' identified by 'senha' with grant option;
+flush privileges;

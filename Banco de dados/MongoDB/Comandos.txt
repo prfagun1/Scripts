@@ -1,0 +1,40 @@
+Acessar console do banco para inserir comandos: mongo
+Backup do banco de dados: mongodump -d BancoDeDados -o /backup/caminho
+
+
+Para acessar a base de dados usar:
+MongoDB Compass Community
+
+Comandos úteis: 
+	• Listar bancos de dados: show dbs
+	• Selecionar um banco de dados: use Banco
+	• Listar usuários: show users
+Mais dicas: https://docs.mongodb.com/manual/reference/mongo-shell/ 
+
+
+
+Criar usuário
+mongo
+use admin
+db.createUser( { user: "admin", pwd: "senha", roles: [ "userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase"] } )
+db.createUser( { user: "admin", pwd: "senha", roles: [ "root", "userAdminAnyDatabase", "dbAdminAnyDatabase", "readWriteAnyDatabase"] } )
+
+
+Apagar usuario:
+db.dropUser("usuario")
+
+
+Acessar
+mongo --username admin --password --authenticationDatabase admin --host 127.0.0.1 --port 27017
+
+
+db.createUser({
+user: 'usuario',
+pwd: 'senha',
+roles: [{ role: 'readWrite', db:'banco'}]
+})
+
+
+
+
+Criar um banco de dados de graça para testes: https://www.mongodb.com/cloud/atlas

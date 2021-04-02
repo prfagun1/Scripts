@@ -1,0 +1,5 @@
+
+CREATE OR REPLACE DIRECTORY dump AS '/u01/'
+
+expdp system/senha@instancia schemas=usuario  directory=dump dumpfile=arquivo.dmp logfile=log.log flashback_time=systimestamp
+impdp system SCHEMAS=usuario DUMPFILE=/u01/arquivo.dmp LOGFILE=log.log DUMPFILE=arquivo.dmp table_exists_action=REPLACE

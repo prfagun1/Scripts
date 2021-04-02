@@ -1,0 +1,5 @@
+mysqldump -u sas -psenha usuario  > ..\arquivoDeSaida.sql
+
+mysql -u root -e "drop database banco" -p
+mysql -u root -e "create database banco" -p
+mysql -u root banco -p < "caminhoDoArquivo"

@@ -1,0 +1,7 @@
+DELETE FROM MON$STATEMENTS
+  WHERE MON$ATTACHMENT_ID = 32
+          
+--To disconnect all clients except the “Me” connection: 
+DELETE FROM MON$ATTACHMENTS
+  WHERE MON$ATTACHMENT_ID <> CURRENT_CONNECTION
+          

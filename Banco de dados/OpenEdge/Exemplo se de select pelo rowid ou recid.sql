@@ -1,0 +1,1 @@
+SELECT * FROM pub."it-requisicao" WHERE ROWID = 339026571 WITH (NOLOCK)  

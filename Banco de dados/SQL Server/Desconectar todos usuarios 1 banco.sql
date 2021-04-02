@@ -1,0 +1,4 @@
+ALTER DATABASE OperationsManager_Unimed SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+
+--Voltar
+ALTER DATABASE OperationsManager_Unimed SET MULTI_USER 

@@ -1,0 +1,1 @@
+select event,sid from v$session_wait;

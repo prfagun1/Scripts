@@ -1,0 +1,21 @@
+Para habilitar o modo de arquivamento em seu banco de dados modifique-o desta maneira:
+Pare o banco:
+shutdown abort
+
+SQL> Shutdown immediate
+Banco de dados fechado.
+Banco de dados desmontado.
+Instância ORACLE desativada.
+
+SQL> startup mount
+Instância ORACLE iniciada.
+
+SQL>alter database archivelog; (se quiser desativar SQL>alter database noarchivelog;)
+
+Execute um shutdown immediate e abra o banco novamente:
+
+SQL>startup;
+
+Após abrir o banco pode-se verificar se o banco esta em modo de archive através do comando:
+
+SQL> archive log list

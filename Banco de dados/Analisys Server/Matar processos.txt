@@ -1,0 +1,8 @@
+XMLA query
+
+<Cancel xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ConnectionID>[CID]</ConnectionID>
+  <SessionID>[SID]</SessionID>
+  <SPID>[SPID]</SPID>
+  <CancelAssociated>[true/false]</CancelAssociated>
+</Cancel>

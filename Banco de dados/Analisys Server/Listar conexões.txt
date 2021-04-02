@@ -1,0 +1,3 @@
+Select * from $System.discover_sessions
+Select * from $System.discover_connections
+Select * from $System.discover_object_activity order by 3 desc

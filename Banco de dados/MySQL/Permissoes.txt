@@ -1,0 +1,6 @@
+Criar usuário:
+CREATE USER 'usuario'@'10.%.%.%' IDENTIFIED BY 'senha';
+
+Dar permissão total ao usuário no banco:
+GRANT ALL ON database.* TO 'user'@'localhost';
+flush privileges;

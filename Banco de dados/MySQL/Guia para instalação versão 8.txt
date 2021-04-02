@@ -1,0 +1,75 @@
+Guia para instalação versão 8
+
+Baixar o pacote RPM do site do MySQL
+https://dev.mysql.com/downloads/repo/yum/
+
+Link atual com comando:
+rpm -Uvh https://repo.mysql.com/mysql80-community-release-el7-3.noarch.rpm
+rpm -Uvh https://dev.mysql.com/get/mysql80-community-release-el8-1.noarch.rpm
+
+yum install -y yum-utils
+
+dnf module list mysql
+dnf install @mysql:8.0 -y
+
+
+
+Editar o arquivo: vim /etc/my.cnf
+
+Colocar as configurações abaixo:
+
+#datadir=/var/lib/mysqli
+socket=/var/lib/mysql/mysql.sock
+pid-file=/var/run/mysqld/mysqld.pid
+
+tmpdir          = /dev/shm
+basedir         = /var/lib/mysql
+datadir         = /opt/mysql/data
+
+
+# Logging
+log_error                       = /var/log/mysql/mysql_error.log
+log_queries_not_using_indexes   = 1
+long_query_time                 = 5
+slow_query_log                  = on     # Disabled for production
+slow_query_log_file             = /var/log/mysql/mysql_slow.log
+lc_messages_dir =/usr/share/mysql-8.0
+lc_messages = en_US
+
+
+
+Criar as pastas e dar as permissões:
+mkdir /var/log/mysql -p
+mkdir /opt/mysql/data -p
+
+chown mysql.mysql /var/log/mysql -R
+chown mysql.mysql /opt/mysql -R
+
+chmod 0750 /var/log/mysql
+chmod 0750 /opt/mysql/data
+
+
+
+Liberar no firewall:
+firewall-cmd --zone=public --add-service=mysql --permanent
+firewall-cmd  --reload
+
+Iniciar o serviço:
+systemctl start mysqld
+
+A senha inicial do root pode ser encontrada com o cmando abaixo:
+cat /var/log/mysql/mysql_error.log | grep "password is generated"
+Ou
+cat /var/log/mysql/mysql_error.log | grep "password is generated" | cut -d" " -f 13
+
+Caso o log tenha sido apagado pode se apagar o conteúdo da pasta logs e data e após digitar:
+mysqld --initialize
+*caso seja feito este procedimento é preciso verificar as permissões
+
+Com a senha do root executar:
+mysql_secure_installation
+
+Trocar a senha do root e remover o acesso remoto através dele.
+
+Habilitar o serviço para iniciar automático: 
+systemctl enable mysqld

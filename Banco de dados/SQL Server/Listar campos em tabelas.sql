@@ -1,0 +1,1 @@
+SELECT name FROM sysobjects WHERE id IN ( SELECT id FROM syscolumns WHERE name like '%centrali%' )

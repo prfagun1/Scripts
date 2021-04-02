@@ -1,0 +1,1 @@
+select 'grant view definition on ' + ROUTINE_NAME + ' to RCP_LET' from information_schema.routines where routine_type = 'PROCEDURE'

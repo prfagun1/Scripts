@@ -1,0 +1,1 @@
+select * from PUB."_SQL_Qplan"

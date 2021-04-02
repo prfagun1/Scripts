@@ -1,0 +1,66 @@
+Apagar banco de dados
+prodel ems2mov
+
+Banco de dados com problema ao iniciar, shared memory presa
+http://knowledgebase.progress.com/articles/Article/15912
+
+
+Script para restaurar banco
+prorest cad2esp bkp_cad2esp.bak
+
+
+Após o restore comando para ler o banco e setar estrutura nova com o comando
+prostrct list ems2aed
+ele irá gerar um novo arquivo o .st
+editar e setar o caminho correto dos arquivos
+
+prostrct repair ems2aed
+
+Ativar um índice: proutil ems2mov -C idxactivate pub.movto-estoq.mvtstt_ix22
+
+Após comando para truncar o log
+proutil ems2aed -C truncate bi -G 0
+
+
+Listar usuários banco de dados
+Proshut srmov.db -C list
+
+
+Importar DF progress
+Tools - Data administration
+admin - Load Data Definitions -> Data Definitions (.df file)
+
+
+Verificar se banco esta no ar
+dbipcs | grep banco
+log arquivo .lg
+
+
+Para abrir um banco
+promom banco
+
+
+Desconectar usuário do banco
+proshut <db-name> -C list
+proshut <db-name> -C disconnect <user-num>
+
+
+Alterar banco:
+Tools - Data administration
+Database - Select working database
+
+
+Para setar variaveis
+. dlc
+
+
+Listar os processos do appserver
+asbman -name erptotvs -q
+
+
+Reindexar banco
+proutil emsesp.db  -C idxbuild
+
+
+--Mover uma tabela de um schema area para outro
+proutil emsesp -C tablemove pub rs-fator-conver-it-fornec Dados64

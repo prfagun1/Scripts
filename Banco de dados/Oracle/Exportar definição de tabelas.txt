@@ -1,0 +1,4 @@
+Exportar definição de tabelas
+
+expdp system/senha directory=exp_wpd schemas=pmed dumpfile=pmed.dmp content=metadata_only logfile=exp_pmed.log
+irá gerar no /oracle/dump

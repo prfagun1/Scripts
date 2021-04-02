@@ -1,0 +1,1 @@
+Nova consulta MDX: select distinct connection_user_name from $system.discover_connections
