@@ -1,0 +1,1 @@
+for i in *.d; do gzip -cvf $i > $i.gz; done;

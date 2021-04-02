@@ -1,0 +1,1 @@
+tree /opt -L 3 -r -d -du -h

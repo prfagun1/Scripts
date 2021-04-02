@@ -1,0 +1,1 @@
+convmv -r -f -iso8859-15 -t utf8 --nfc --notest *

@@ -1,0 +1,1 @@
+find . -type f | xargs grep -l "texto" 2> /dev/null

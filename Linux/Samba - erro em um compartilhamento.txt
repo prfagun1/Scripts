@@ -1,0 +1,12 @@
+Quando o log do samba /var/log/samba/log.smbd tiver a mensagem abaixo:
+smbd/service.c:891(make_connection_snum)
+  make_connection: connection to erp1 denied due to security descriptor
+
+E somente alguns compartilhamentos pararem de funcionar.
+
+É necessário parar o serviço do samba:
+service smb stop
+
+E apagar o arquivo share_info.tdb que no CentOS está na pasta /var/lib/samba.
+
+Após isso inicie o serviço do samba e o compartilhamento voltará a funcionar.

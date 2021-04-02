@@ -1,0 +1,1 @@
+egrep " ro,|,ro " /proc/mounts

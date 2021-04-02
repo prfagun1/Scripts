@@ -1,0 +1,71 @@
+Antes de começar é necessário verificar se o volume tem suporte para ACL.
+Para isso digitar o comando abaixo e verificar seu formato:
+mount
+Caso seja “xfs” ele já oferece suporte nativo, não é necessário habilitar o ACL.
+Caso seja ext3 ou ext4 é necessário remontar a unidade e adicionar no fstab o suporte para ACL.
+Para remontar com suporte: 
+mount -o remount,acl /opt
+Adicionar na fstab.
+vim /etc/fstab
+Exemplo da linha:
+/dev/mapper/OPT               /opt          ext3    defaults,acl    0 0
+ 
+Comando para verificar se o Samba suporta ACL.
+smbd -b | grep ACL
+ 
+Caso encontre a string tem suporte, caso não ele precisa ser recompilado com esta opção ou reinstalado.
+ 
+Após editar o arquivo smb.conf.
+vim /etc/samba/smb.conf
+ 
+E acrescentar as linhas abaixo nos parâmetros globais ([global]).
+        vfs objects = acl_xattr
+        map acl inherit = yes
+        store dos attributes = yes
+ 
+Para que seja possível gerenciar as permissões via Windows é necessário ter o privilégio SeDiskOperatorPrivilege, para verificar isto digitar o comando, esta permissão deve aparecer somente para o administrator local:
+net rpc rights list accounts -U'dominio\administrator'
+ 
+
+Caso a mensagem abaixo apareça.
+Could not connect to server 127.0.0.1
+Connection failed: NT_STATUS_CANT_ACCESS_DOMAIN_INFO
+ 
+ 
+Digite o comando abaixo:
+net rpc rights list accounts -U'dominio\administrator' -I dominio.net
+ 
+ 
+ 
+Agora daremos permissão para o grupo Domain Admins, porém antes disso é necessário verificar se ele está disponível, para isto informar o ocmando abaixo:
+getent group "Domain Admins"
+ 
+Exemplo de resposta esperada: domain admins:x:617:
+ 
+ 
+Caso não funcione, verifique as configurações do winbind e NSS.
+ 
+Após é necessário dar permissão para os usuários do grupo Domain Admins.
+net rpc rights grant 'dominio\Domain Admins' SeDiskOperatorPrivilege -U'dominio\administrator'
+Agora é necessário criar a pasta e dar permissão na mesma:
+mkdir -p /opt/compartilhamento
+chmod g=rwx /opt/compartilhamento
+chgrp "Domain Admins" /opt/compartilhamento
+ 
+ 
+ Após editar o arquivo smb.conf e criar um compartilhamento para pasta criada adicionando as linhas abaixo:
+vim /etc/samba/smb.conf
+ 
+[compartilhamento]
+       path = /opt/compartilhamento
+       read only = no
+ 
+ 
+Agora basta carregar as configurações do samba.
+smbcontrol all reload-config
+
+
+
+# setfacl -R -b /srv/samba/Demo/
+# setfacl -R -b /srv/samba/Demo/*
+# setfacl -R -m default:group:"Domain Admins":rwx /srv/samba/Demo/

@@ -1,0 +1,9 @@
+vim /etc/mail/sendmail.mc
+
+define(`SMART_HOST', `[webmail.dominio.com.br]')dnl
+m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf
+
+yum install sendmail-cf.noarch
+make -C /etc/mail
+
+service sendmail restart

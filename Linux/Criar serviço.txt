@@ -1,0 +1,45 @@
+Criar um arquivo na pasta /usr/lib/systemd/system com a extenção .service, como no exemplo abaixo:
+vi /usr/lib/systemd/system/jboss_erptotvs.service
+ 
+Abaixo segue um exemplo do conteúdo deste arquivo:
+[Unit]
+Description=Jboss 
+After=syslog.target network.target
+[Service]
+ExecStart=/opt/jboss/bin/jboss start
+ExecStop=/opt/jboss/bin/jboss stop
+[Install]
+WantedBy=multi-user.target
+ 
+ 
+Obs.: Em caso de um serviço tomcat adicionar a linha abaixo logo após o item [Service]
+Type=forking
+ 
+No caso de um serviço jboss é necessário alterar o arquivo que é chamado neste caso: /opt/jboss/4.2.3/jboss-4.2.3.GA/bin/jboss_erptotvs
+Procurar pelas linhas utilizadas para iniciar a aplicação e remover o "&" do final de duas linhas.
+O arquivo passa de:
+start)
+    cd $JBOSS_HOME/bin
+    if [ -z "$SUBIT" ]; then
+        eval $JBOSS_CMD_START >${JBOSS_CONSOLE} 2>&1 &
+    else
+        $SUBIT "$JBOSS_CMD_START >${JBOSS_CONSOLE} 2>&1 &"
+    fi
+Para:
+start)
+    cd $JBOSS_HOME/bin
+    if [ -z "$SUBIT" ]; then
+        eval $JBOSS_CMD_START >${JBOSS_CONSOLE} 2>&1
+    else
+        $SUBIT "$JBOSS_CMD_START >${JBOSS_CONSOLE} 2>&1 "
+    fi
+ 
+Após salvar o arquivo.
+Após esta configuração é necessário informar o comando abaido para carregar as configurações:
+systemctl daemon-reload
+ 
+Para habilitar o serviço para iniciar automaticamente: systemctl enable serviço
+Para desabilitar o serviço: systemctl disable serviço
+Para ver o status: systemctl status serviço
+Para iniciar: systemctl start serviço
+Para parar: systemctl stop serviço

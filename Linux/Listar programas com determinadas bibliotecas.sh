@@ -1,0 +1,1 @@
+yum provides */libnss_winbind.so.*

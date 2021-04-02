@@ -1,0 +1,5 @@
+Alterar timezone
+date
+ls -l /etc/localtime
+timedatectl list-timezones
+imedatectl set-timezone America/Sao_Paulo

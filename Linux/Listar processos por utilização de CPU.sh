@@ -1,0 +1,1 @@
+ps -eo pid,user,pcpu,command --sort=-pcpu | more

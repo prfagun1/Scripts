@@ -1,0 +1,1 @@
+find . -size +1024 -exec ls -sh {} \; 2> /dev/null | sort -nr | head -n 20

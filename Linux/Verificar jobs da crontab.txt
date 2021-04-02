@@ -1,0 +1,1 @@
+Todos os jobs ficam salvos na pasta: /var/spool/cron

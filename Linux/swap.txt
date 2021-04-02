@@ -1,0 +1,3 @@
+Processo para reduzir a quantidade de emória virtual utilizada pelo sistema operacional.
+# swapoff -a  - Desativa (Limpa a área utilizada) a área de swap para todos os dispositivos
+# swapon -a   - Ativa a área de swap para todos os dispositivos
